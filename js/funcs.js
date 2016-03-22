@@ -6,6 +6,7 @@ $(document).ready(function() {
 
 function getdata() {
 	"use strict";
+	$('#progtable tbody').empty();
 	$.ajax({
 		url: 'q_proglist.php',
 		type: 'GET',
