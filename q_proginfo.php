@@ -29,5 +29,6 @@ foreach ($links as $link) {
 		else $rVal['email'][$i++]=$extracted;
 	}
 }
+$rVal['email']=array_unique($rVal['email']);
 echo json_encode($rVal);
 ?>
