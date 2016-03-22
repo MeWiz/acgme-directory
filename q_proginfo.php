@@ -24,7 +24,9 @@ foreach ($links as $link) {
 	$target=$link->getAttribute('href');
 	if (substr($target,0,7)==="mailto:") {
 		// ignore "mailto:" part, remove any weird question marks, then validate with the email filter
-		$rVal['email'][$i++]=filter_var(str_replace('?','',substr($target,7)),FILTER_SANITIZE_EMAIL);
+		$extracted=filter_var(str_replace('?','',substr($target,7)),FILTER_SANITIZE_EMAIL);
+		if (strlen($extracted)<5) continue;	// ignore blank email
+		else $rVal['email'][$i++]=$extracted;
 	}
 }
 echo json_encode($rVal);
