@@ -1,5 +1,7 @@
 <?php
 // return list of programs matching state and specialty
+// looks for table rows with the class of "listview-row" and then the cells in that row
+
 $url = "https://apps.acgme.org/ads/Public/Programs/Search?stateId=".$_GET['state']."&specialtyId=".$_GET['specialty'];
 $ch = curl_init();
 $timeout = 5;
@@ -19,9 +21,9 @@ $rows=$dom->getElementsByTagName('tr');
 foreach ($rows as $row) {
 	if (trim($row->getAttribute('class'))==="listview-row") {
 		$cells=$row->getElementsByTagName('td');
-		$rVal[$i]['progid']=$row->getAttribute('data-item-key');
+		$rVal[$i]['progid']=$row->getAttribute('data-item-key');	// this is the program ID used for q_proglist
 		$rVal[$i]['name']=trim($cells->item(2)->nodeValue);
-		$rVal[$i++]['code']=trim($cells->item(0)->nodeValue);
+		$rVal[$i++]['code']=trim($cells->item(0)->nodeValue);	// acgme program code
 	}
 }
 echo json_encode($rVal);
