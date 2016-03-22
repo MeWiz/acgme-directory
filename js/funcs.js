@@ -1,4 +1,6 @@
 // JavaScript Document
+var queries_in_progress=[];
+
 $(document).ready(function() {
 	"use strict";
     $('#doit').on('click',function(){getdata();});
@@ -6,7 +8,15 @@ $(document).ready(function() {
 
 function getdata() {
 	"use strict";
+	
+	// reset table, cancel pending queries
 	$('#progtable tbody').empty();
+	$.each(queries_in_progress, function(key, val) {
+		// explicitly abort all queries that were called in previous function, even if already aborted
+		val.abort();
+	});
+	queries_in_progress=[];
+	
 	$.ajax({
 		url: 'q_proglist.php',
 		type: 'GET',
@@ -20,7 +30,7 @@ function getdata() {
 				// create new row for each program
 				$('#progtable').append("<tr id='t_"+val.progid+"'><td>"+val.code+"</td><td>"+val.name+"</td></tr>");
 				// query email addresses for this program
-				$.ajax({
+				queries_in_progress[queries_in_progress.length]=$.ajax({
 					url: 'q_proginfo.php',
 					type: 'GET',
 					data: {
