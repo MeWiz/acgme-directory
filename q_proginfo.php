@@ -17,13 +17,15 @@ $dom = new DOMDocument();
 @$dom->loadHTML($html);
 
 $rVal=array();
+$i=0;
 $links=$dom->getElementsByTagName('a');		// find link
 foreach ($links as $link) {
 	$target=$link->getAttribute('href');
 	if (substr($target,0,7)==="mailto:") {
 		// ignore "mailto:" part, remove any weird question marks, then validate with the email filter
-		$rVal[]=filter_var(str_replace('?','',substr($target,7)),FILTER_SANITIZE_EMAIL);
+		$rVal[$i]['progid']=$_GET['progid'];
+		$rVal[$i++]['emails']=filter_var(str_replace('?','',substr($target,7)),FILTER_SANITIZE_EMAIL);
 	}
 }
-echo json_encode(array_unique($rVal));
+echo json_encode($rVal);
 ?>
