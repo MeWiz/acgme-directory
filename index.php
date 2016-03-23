@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link href="css/styles.css" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript" src="js/funcs.js"></script>
 <title>ACGME Data Extractor</title>
@@ -54,7 +55,7 @@ foreach($select_spl->getElementsByTagName('option') as $opt) {
 </form>
 </div>
 <div id="progs">
-<table id="progtable">
+<table border="0" cellpadding="0" cellspacing="0" id="progtable">
 <thead>
 <tr><th>Program ID</th><th>Program Name</th><th>emails</th></tr>
 </thead>

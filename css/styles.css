@@ -1,0 +1,37 @@
+/* CSS Document */
+body, p, h1 {
+	margin:0;
+	padding:0;
+	font-family:Cambria, "Hoefler Text", "Liberation Serif", Times, "Times New Roman", serif;
+}
+
+[data-role="header"] {
+	padding: 0.5em;
+	background-color: #1637FB;
+	color: #FFFFFF;
+	margin:0;
+}
+[data-role="content"] {
+	margin-top: 0.25em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+#progs {
+	margin-top: 0.25em;
+	width: 100%;
+}
+#progtable {
+	width: 100%;
+	border-collapse: collapse;
+}
+#progtable td, #progtable th {
+	padding: 0.1em;
+}
+#progtable tbody td {
+	border: solid;
+	border-width: 1px 0;
+	border-color:#AAAAAA;
+}
+#progtable thead tr {
+	outline: thin solid black;
+}
