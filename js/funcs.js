@@ -26,6 +26,11 @@ function getdata() {
 		},
 		dataType: "json",
 		success: function(ret) {
+			if (ret.length===0) {
+				// no programs found
+				$('#progtable').append("<tr><td colspan='3'><i>No programs found for this state/specialty</i></td></tr>");
+				return;
+			}
 			$.each(ret, function(key, val) {
 				// create new row for each program
 				$('#progtable').append("<tr id='t_"+val.progid+"'><td>"+val.code+"</td><td>"+val.name+"</td></tr>");
@@ -39,8 +44,14 @@ function getdata() {
 					dataType:"json",
 					success: function(proginfo) {
 						var row_id="#t_"+proginfo.progid;	// id for row to which cells added
-						var email_str=proginfo.email.join(", ");
-						$(row_id).append("<td>"+email_str+"</td>");
+						if (proginfo.email.length===0) {
+							// no emails found
+							$(row_id).append("<td><i>None found</i></td>");
+						}
+						else {
+							var email_str=proginfo.email.join("<br />");
+							$(row_id).append("<td>"+email_str+"</td>");
+						}
 					},
 					error: function(jqXHR) {
 						console.log(jqXHR.responseText);
