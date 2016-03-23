@@ -2,12 +2,19 @@
 <html>
 <head>
 <meta charset="utf-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <script type="text/javascript" src="js/funcs.js"></script>
 <title>ACGME Data Extractor</title>
 </head>
 
 <body>
+<div data-role="page" id="page1">
+<div data-role="header">
+<h1>Accredited program search</h1>
+</div>
+<div data-role="content">
 <div id="state_spl_div">
 <?php
 // get the master table of state names and specialty codes from the ACGME website
@@ -38,13 +45,15 @@ foreach($select_spl->getElementsByTagName('option') as $opt) {
 }
 ?>
 <form>
-<select id="state" name="state">
+<fieldset data-role="controlgroup" data-type="horizontal">
+<select id="state" name="state" data-native-menu="false">
 <?php foreach ($states as $key=>$val) echo "\t<option value='$key'>$val</option>\r\n"; ?>
 </select>
-<select id="specialty" name="specialty">
+<select id="specialty" name="specialty" data-native-menu="false">
 <?php foreach ($specialty as $key=>$val) echo "\t<option value='$key'>$val</option>\r\n"; ?>
 </select>
 <input type="button" name="doit" id="doit" value="Search &gt;&gt;">
+</fieldset>
 </form>
 </div>
 <div id="progs">
@@ -53,6 +62,10 @@ foreach($select_spl->getElementsByTagName('option') as $opt) {
 <tr><th>Program ID</th><th>Program Name</th><th>emails</th></tr>
 </thead>
 </table>
+</div>
+</div>
+<div data-role="footer">
+<h4>&nbsp;</h4>
 </div>
 </body>
 </html>
