@@ -2,9 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
 <script type="text/javascript" src="js/funcs.js"></script>
 <title>ACGME Data Extractor</title>
 </head>
@@ -40,20 +38,19 @@ foreach($select_states->getElementsByTagName('option') as $opt) {
 
 $select_spl=$dom->getElementById('specialtyFilter');
 foreach($select_spl->getElementsByTagName('option') as $opt) {
+	if ($opt->getAttribute('class')==='optionChild') continue; // skip fellowships
 	$id=$opt->getAttribute('value');
 	if (is_numeric($id)) $specialty[$id]=trim($opt->nodeValue);
 }
 ?>
 <form>
-<fieldset data-role="controlgroup" data-type="horizontal">
-<select id="state" name="state" data-native-menu="false">
+<select id="state" name="state">
 <?php foreach ($states as $key=>$val) echo "\t<option value='$key'>$val</option>\r\n"; ?>
 </select>
 <select id="specialty" name="specialty" data-native-menu="false">
 <?php foreach ($specialty as $key=>$val) echo "\t<option value='$key'>$val</option>\r\n"; ?>
 </select>
 <input type="button" name="doit" id="doit" value="Search &gt;&gt;">
-</fieldset>
 </form>
 </div>
 <div id="progs">
