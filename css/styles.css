@@ -26,6 +26,11 @@ body, p, h1 {
 }
 #progtable td, #progtable th {
 	padding: 0.1em;
+	vertical-align:top;
+	text-align: left;
+}
+#progtable tr:nth-child(even) {
+	background-color: #EEEEEE;
 }
 #progtable tbody td {
 	border: solid;
