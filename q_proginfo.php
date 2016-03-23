@@ -26,7 +26,7 @@ foreach ($links as $link) {
 		// ignore "mailto:" part, remove any weird question marks, then validate with the email filter
 		$extracted=filter_var(str_replace('?','',substr($target,7)),FILTER_SANITIZE_EMAIL);
 		if (strlen($extracted)<5) continue;	// ignore blank email
-		else $rVal['email'][$i++]=$extracted;
+		else $rVal['email'][$i++]=strtolower($extracted);
 	}
 }
 $rVal['email']=array_unique($rVal['email']);
