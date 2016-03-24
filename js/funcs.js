@@ -47,7 +47,8 @@ function getdata() {
 						var row_id="#t_"+proginfo.progid;	// id for row to which cells added
 						
 						// add address
-						$(row_id).append("<td>"+proginfo.address+"</td>");
+						var add=proginfo.address.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '<br />' + '$2');
+						$(row_id).append("<td>"+add+"</td>");
 						
 						// add emails
 						if (proginfo.email.length===0) {
