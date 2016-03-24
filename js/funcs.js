@@ -33,6 +33,7 @@ function getdata() {
 			}
 			$.each(ret, function(key, val) {
 				// create new row for each program
+				console.log("Searching info for prog "+val.progid);
 				$('#progtable').append("<tr id='t_"+val.progid+"'><td>"+val.code+"</td><td>"+val.name+"</td></tr>");
 				// query email addresses for this program
 				queries_in_progress[queries_in_progress.length]=$.ajax({
@@ -49,7 +50,13 @@ function getdata() {
 							$(row_id).append("<td><i>None found</i></td>");
 						}
 						else {
-							var email_str=proginfo.email.join("<br />");
+							var email_str="";
+							if (proginfo.email.length>1) {
+								email_str=proginfo.email.join("<br />");
+							}
+							else {
+								email_str=proginfo.email;
+							}
 							$(row_id).append("<td>"+email_str+"</td>");
 						}
 					},
