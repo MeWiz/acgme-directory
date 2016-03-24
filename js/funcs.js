@@ -1,5 +1,6 @@
 // JavaScript Document
 var queries_in_progress=[];
+var csv_export_data=[];
 
 $(document).ready(function() {
 	"use strict";
@@ -33,8 +34,10 @@ function getdata() {
 			}
 			$.each(ret, function(key, val) {
 				// create new row for each program
-				console.log("Searching info for prog "+val.progid);
+//				console.log("Searching info for prog "+val.progid);
 				$('#progtable').append("<tr id='t_"+val.progid+"'><td>"+val.code+"</td><td>"+val.name+"</td></tr>");
+				csv_export_data[val.progid]={code: val.code, name: val.name};
+
 				// query additional info for this program
 				queries_in_progress[queries_in_progress.length]=$.ajax({
 					url: 'q_proginfo.php',
@@ -56,6 +59,7 @@ function getdata() {
 							$(row_id).append("<td><i>None found</i></td>");
 						}
 						else {
+							csv_export_data[proginfo.progid].email=proginfo.email;
 							var email_str="";
 							if (proginfo.email.length>1) {
 								email_str=proginfo.email.join("<br />");
@@ -71,6 +75,7 @@ function getdata() {
 					}
 				});
 			});
+//			console.log(csv_export_data);
 		},
 		error: function (jqXHR) {
 			console.log(jqXHR.responseText);
