@@ -11,12 +11,12 @@ function getdata() {
 	"use strict";
 	
 	// reset table, cancel pending queries
-	$('#progtable tbody').empty();
 	$.each(queries_in_progress, function(key, val) {
 		// explicitly abort all queries that were called in previous function, even if already aborted
 		val.abort();
 	});
-	queries_in_progress=[];
+	$('#progtable tbody').empty();
+	queries_in_progress=csv_export_data=[];
 	
 	$.ajax({
 		url: 'q_proglist.php',
@@ -50,6 +50,7 @@ function getdata() {
 						var row_id="#t_"+proginfo.progid;	// id for row to which cells added
 						
 						// add address
+						csv_export_data[val.progid].address=proginfo.address;
 						var add=proginfo.address.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + '<br />' + '$2');
 						$(row_id).append("<td>"+add+"</td>");
 						
@@ -75,7 +76,7 @@ function getdata() {
 					}
 				});
 			});
-//			console.log(csv_export_data);
+			console.log(csv_export_data);
 		},
 		error: function (jqXHR) {
 			console.log(jqXHR.responseText);
