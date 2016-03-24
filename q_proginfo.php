@@ -29,6 +29,6 @@ foreach ($links as $link) {
 		else $rVal['email'][$i++]=strtolower($extracted);
 	}
 }
-$rVal['email']=array_unique($rVal['email']);
+$rVal['email']=array_values(array_unique($rVal['email'], SORT_STRING));
 echo json_encode($rVal);
 ?>
