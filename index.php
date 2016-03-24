@@ -57,7 +57,7 @@ foreach($select_spl->getElementsByTagName('option') as $opt) {
 <div id="progs">
 <table border="0" cellpadding="0" cellspacing="0" id="progtable">
 <thead>
-<tr><th>Program ID</th><th>Program Name</th><th>emails</th></tr>
+<tr><th>Program ID</th><th>Program Name</th><th>Address</th><th>emails</th></tr>
 </thead>
 </table>
 </div>

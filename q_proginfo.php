@@ -18,6 +18,8 @@ $dom = new DOMDocument();
 
 $rVal=array();
 $rVal['progid']=$_GET['progid'];
+
+// extract email IDs
 $i=0;
 $links=$dom->getElementsByTagName('a');		// find link
 foreach ($links as $link) {
@@ -28,6 +30,11 @@ foreach ($links as $link) {
 		if (strlen($extracted)<5) continue;	// ignore blank email
 		else $rVal['email'][$i++]=strtolower($extracted);
 	}
+	
+//extract mailing address
+$add=$dom->getElementsByTagName('address');
+$rVal['address']=trim($add->item(0)->nodeValue);
+
 }
 $rVal['email']=array_values(array_unique($rVal['email'], SORT_STRING));
 echo json_encode($rVal);

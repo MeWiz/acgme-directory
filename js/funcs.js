@@ -28,14 +28,14 @@ function getdata() {
 		success: function(ret) {
 			if (ret.length===0) {
 				// no programs found
-				$('#progtable').append("<tr><td colspan='3'><i>No programs found for this state/specialty</i></td></tr>");
+				$('#progtable').append("<tr><td colspan='4'><i>No programs found for this state/specialty</i></td></tr>");
 				return;
 			}
 			$.each(ret, function(key, val) {
 				// create new row for each program
 				console.log("Searching info for prog "+val.progid);
 				$('#progtable').append("<tr id='t_"+val.progid+"'><td>"+val.code+"</td><td>"+val.name+"</td></tr>");
-				// query email addresses for this program
+				// query additional info for this program
 				queries_in_progress[queries_in_progress.length]=$.ajax({
 					url: 'q_proginfo.php',
 					type: 'GET',
@@ -45,6 +45,11 @@ function getdata() {
 					dataType:"json",
 					success: function(proginfo) {
 						var row_id="#t_"+proginfo.progid;	// id for row to which cells added
+						
+						// add address
+						$(row_id).append("<td>"+proginfo.address+"</td>");
+						
+						// add emails
 						if (proginfo.email.length===0) {
 							// no emails found
 							$(row_id).append("<td><i>None found</i></td>");
