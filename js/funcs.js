@@ -105,7 +105,7 @@ function getdata() {
 					}
 				});
 			});
-			console.log(csv_export_data);
+//			console.log(csv_export_data);
 		},
 		error: function (jqXHR, textStatus) {
 			console.log("q_proglist err! "+textStatus+jqXHR.responseText);
