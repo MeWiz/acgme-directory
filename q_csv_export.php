@@ -1,20 +1,9 @@
 <?php
 // takes javascript var and outputs as csv
 
-// first delete old files in dir
-$now=time();
-$files=glob("tmp/*");
-foreach ($files as $file) {
-	if (is_file($file))
-		if ($now-filemtime($file)>=60*60*24) unlink($file);
-}
-
-// create new file
-$filename=strtolower("tmp/".$_POST['state']).rand(100,999).".csv";
-$out = fopen($filename, 'w');
+$out = fopen("php://output", 'w');
 
 $maxemails=0;
-$str=array();
 foreach($_POST['csv_data'] as $csv_data) {
 	// identify the max emails present in the entire data set
 	if (count($csv_data['email'])>$maxemails) $maxemails=count($csv_data['email']);
@@ -34,5 +23,4 @@ foreach($_POST['csv_data'] as $csv_data) {
 }
 
 fclose($out);
-echo $filename;
 ?>

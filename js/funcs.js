@@ -17,11 +17,14 @@ function csv_export() {
 		url: 'q_csv_export.php',
 		type: 'POST',
 		data: {
-			csv_data: csv_export_data,
-			state: $('#state option:selected').text()
+			csv_data: csv_export_data
 		},
 		success: function(ret) {
-			alert(ret);
+			var data=encodeURI('data:text/csv;charset=utf-8,'+ret);
+			var lnk=document.createElement('a');
+			lnk.setAttribute('href', data);
+			lnk.setAttribute('download', 'export.csv');
+			lnk.click();
 		},
 		error: function (jqXHR, textStatus) {
 			console.log("q_csv_export err! "+textStatus+jqXHR.responseText);
