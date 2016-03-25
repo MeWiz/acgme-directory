@@ -1,6 +1,16 @@
 <?php
 // takes javascript var and outputs as csv
-$filename=strtolower($_POST['state']).".csv";
+
+// first delete old files in dir
+$now=time();
+$files=glob("tmp/*");
+foreach ($files as $file) {
+	if (is_file($file))
+		if ($now-filemtime($file)>=60*60*24) unlink($file);
+}
+
+// create new file
+$filename=strtolower("tmp/".$_POST['state']).rand(100,999).".csv";
 $out = fopen($filename, 'w');
 
 $maxemails=0;
