@@ -5,7 +5,29 @@ var csv_export_data=[];
 $(document).ready(function() {
 	"use strict";
     $('#doit').on('click',function(){getdata();});
+	$('#csv_link').on('click', function(){csv_export();}).hide();
 });
+
+function csv_export() {
+	"use strict";
+	if (csv_export_data.length===0) { return; }
+	
+	csv_export_data=csv_export_data.filter(function(val){return val;}); 	//reindex array
+	$.ajax({
+		url: 'q_csv_export.php',
+		type: 'POST',
+		data: {
+			csv_data: csv_export_data,
+			state: $('#state option:selected').text()
+		},
+		success: function(ret) {
+			alert(ret);
+		},
+		error: function (jqXHR, textStatus) {
+			console.log("q_csv_export err! "+textStatus+jqXHR.responseText);
+		}
+	});		
+}
 
 function getdata() {
 	"use strict";
@@ -15,6 +37,7 @@ function getdata() {
 		// explicitly abort all queries that were called in previous function, even if already aborted
 		val.abort();
 	});
+	$('#csv_link').hide();
 	$('#progtable tbody').empty();
 	queries_in_progress=[];
 	csv_export_data=[];
@@ -71,6 +94,8 @@ function getdata() {
 							}
 							$(row_id).append("<td>"+email_str+"</td>");
 						}
+						// ideally, show the csv export link after the last query returns - this code makes it show after the first proginfo query returns
+						$('#csv_link').show();
 					},
 					error: function(jqXHR, textStatus) {
 						console.log("q_proginfo err! "+textStatus+jqXHR.responseText);

@@ -63,7 +63,7 @@ foreach($select_spl->getElementsByTagName('option') as $opt) {
 </div>
 </div>
 <div data-role="footer">
-<h4>&nbsp;</h4>
+<h4><a href="#" id="csv_link">CSV Export</a></h4>
 </div>
 </body>
 </html>
