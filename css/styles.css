@@ -40,3 +40,11 @@ body, p, h1 {
 #progtable thead tr {
 	outline: thin solid black;
 }
+#csv_link {
+	float: right;
+	margin-right: 0.5em;
+	padding: 0.2em;
+	outline: solid 1px #000000;
+	cursor: pointer;
+	background-color:#DDDDDD;
+}
