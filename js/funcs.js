@@ -45,6 +45,7 @@ function getdata() {
 	queries_in_progress=[];
 	csv_export_data=[];
 	
+	console.log("q_proglist with state "+$('#state').val()+" & specialty "+$('#specialty').val());
 	$.ajax({
 		url: 'q_proglist.php',
 		type: 'GET',
