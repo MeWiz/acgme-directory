@@ -22,8 +22,8 @@ foreach ($rows as $row) {
 	if (trim($row->getAttribute('class'))==="listview-row") {
 		$cells=$row->getElementsByTagName('td');
 		$rVal[$i]['progid']=$row->getAttribute('data-item-key');	// this is the program ID used for q_proglist
-		$rVal[$i]['name']=trim($cells->item(2)->nodeValue);
-		$rVal[$i++]['code']=trim($cells->item(0)->nodeValue);	// acgme program code
+		$rVal[$i]['name']=trim($cells->item(3)->nodeValue);
+		$rVal[$i++]['code']=trim($cells->item(1)->nodeValue);	// acgme program code
 	}
 }
 echo json_encode($rVal);
