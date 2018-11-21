@@ -3,11 +3,12 @@
 // searches for mailto: links in DOM
 // returns json with all unique email IDs, empty if no emails found
 
-$url = "https://apps.acgme.org/ads/Public/Programs/Detail?programId=".$_GET['progid'];
+$url = "https://apps.acgme.org/ads/Public/Programs/Detail?programId=".$_GET['progid']."&ReturnURL=".$_GET['referer'];
 $ch = curl_init();
 $timeout = 5;
 curl_setopt($ch, CURLOPT_URL, $url) or die (curl_error($ch));
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true) or die (curl_error($ch));
+curl_setopt($ch, CURLOPT_REFERER, $_GET['referer']);
 curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout) or die (curl_error($ch));
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false) or die (curl_error($ch));
 $html = curl_exec($ch) or die (curl_error($ch));

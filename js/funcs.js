@@ -65,13 +65,15 @@ function getdata() {
 //				console.log("Searching info for prog "+val.progid);
 				$('#progtable').append("<tr id='t_"+val.progid+"'><td>"+val.code+"</td><td>"+val.name+"</td></tr>");
 				csv_export_data[val.progid]={code: val.code, name: val.name};
+				var referer='https://apps.acgme.org/ads/Public/Programs/Search?stateId='+$('#state').val()+'&specialtyId='+$('#specialty').val()+'&specialtyCategoryTypeId=&numCode=&city='
 
 				// query additional info for this program
 				queries_in_progress[queries_in_progress.length]=$.ajax({
 					url: 'q_proginfo.php',
 					type: 'GET',
 					data: {
-						progid: val.progid
+						progid: val.progid,
+						referer: referer
 					},
 					dataType:"json",
 					success: function(proginfo) {
